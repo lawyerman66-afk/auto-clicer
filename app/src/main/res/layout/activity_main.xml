@@ -7,10 +7,14 @@
     android:layoutDirection="rtl">
 
     <Button android:id="@+id/btnAccess" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="۱) فعال‌سازی سرویس دسترسی‌پذیری" />
+        android:layout_height="wrap_content" android:text="۱) فعال‌سازی سرویس دسترسی‌پذیری (فقط بار اول)" />
+
+    <CheckBox android:id="@+id/cbNow" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_marginTop="12dp"
+        android:text="شروع فوری با زدن ▶ (بدون ساعت)" />
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" android:text="زمان شروع (ساعت / دقیقه / ثانیه)" />
+        android:layout_marginTop="8dp" android:text="زمان شروع (ساعت / دقیقه / ثانیه)" />
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="horizontal" android:layoutDirection="ltr">
         <EditText android:id="@+id/etHour" android:layout_width="0dp" android:layout_weight="1"
@@ -40,7 +44,7 @@
         <RadioButton android:id="@+id/rbDuration" android:layout_width="wrap_content"
             android:layout_height="wrap_content" android:text="مدت زمان مشخص (ثانیه)" />
         <RadioButton android:id="@+id/rbCount" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:text="تعداد کلیک مشخص" />
+            android:layout_height="wrap_content" android:text="تعداد دور (هر دور = کلیک روی همه هدف‌ها)" />
     </RadioGroup>
     <EditText android:id="@+id/etStopValue" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:inputType="number" android:visibility="gone" />
@@ -55,12 +59,11 @@
         android:layout_height="wrap_content" android:max="90" android:progress="34"
         android:layoutDirection="ltr" />
 
-    <Button android:id="@+id/btnTarget" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="۲) نمایش / مخفی کردن دایره هدف" />
-    <Button android:id="@+id/btnStart" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="۳) شروع (زمان‌بندی)" />
-    <Button android:id="@+id/btnStop" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="توقف" />
+    <Button android:id="@+id/btnSave" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginTop="16dp"
+        android:text="۲) ذخیره و نمایش پنل کنترل" />
+    <Button android:id="@+id/btnClosePanel" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="بستن پنل" />
 
     <TextView android:id="@+id/tvStatus" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="آماده" />
