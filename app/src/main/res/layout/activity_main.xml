@@ -21,20 +21,44 @@
             android:layout_height="wrap_content" android:hint="ثانیه" android:inputType="number" />
     </LinearLayout>
 
-    <EditText android:id="@+id/etInterval" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:hint="فاصله بین کلیک‌ها (میلی‌ثانیه)"
-        android:inputType="number" android:text="100" />
-
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" android:text="فاصله بین کلیک‌ها" />
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="horizontal" android:layoutDirection="ltr">
-        <EditText android:id="@+id/etX" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:hint="X" android:inputType="number" />
-        <EditText android:id="@+id/etY" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:hint="Y" android:inputType="number" />
+        <EditText android:id="@+id/etInterval" android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="300" />
+        <Spinner android:id="@+id/spUnit" android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="16dp" android:text="توقف بعد از" />
+    <RadioGroup android:id="@+id/rgStop" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:orientation="vertical">
+        <RadioButton android:id="@+id/rbForever" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:checked="true" android:text="بی‌پایان (تا وقتی خودم متوقف کنم)" />
+        <RadioButton android:id="@+id/rbDuration" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="مدت زمان مشخص (ثانیه)" />
+        <RadioButton android:id="@+id/rbCount" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:text="تعداد کلیک مشخص" />
+    </RadioGroup>
+    <EditText android:id="@+id/etStopValue" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:inputType="number" android:visibility="gone" />
+
+    <CheckBox android:id="@+id/cbAnti" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_marginTop="8dp"
+        android:text="ضد تشخیص (جابه‌جایی و تغییر زمان تصادفی کوچک)" />
+
+    <TextView android:id="@+id/tvSize" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="اندازه دایره: 64" />
+    <SeekBar android:id="@+id/sbSize" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:max="90" android:progress="34"
+        android:layoutDirection="ltr" />
+
+    <Button android:id="@+id/btnTarget" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="۲) نمایش / مخفی کردن دایره هدف" />
     <Button android:id="@+id/btnStart" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="۲) شروع (زمان‌بندی)" />
+        android:layout_height="wrap_content" android:text="۳) شروع (زمان‌بندی)" />
     <Button android:id="@+id/btnStop" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:text="توقف" />
 
