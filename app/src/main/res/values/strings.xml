@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">اتو کلیکر</string>
+    <string name="service_desc">برای انجام کلیک خودکار در زمان مشخص</string>
+</resources>
