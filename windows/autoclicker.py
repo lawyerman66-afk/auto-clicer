@@ -186,6 +186,7 @@ class App:
             box.grid(row=r, column=0, sticky="w")
             for w in widgets:
                 w.pack(in_=box, side="left", padx=2)
+                w.lift()   # ویجت باید بالاتر از جعبه‌اش باشد وگرنه دیده نمی‌شود
             r += 1
 
         ttk.Checkbutton(f, text="شروع فوری (بدون ساعت)", variable=self.now_var)\
@@ -474,11 +475,31 @@ def resource_path(name):
     return os.path.join(base, name)
 
 
-if __name__ == "__main__":
-    root = tk.Tk()
+def report_crash():
+    """اگر برنامه موقع اجرا خطا بدهد، پیام خطا نمایش داده و در فایل error.log ذخیره می‌شود"""
+    import traceback
+    text = traceback.format_exc()
     try:
-        root.iconbitmap(resource_path("icon.ico"))
+        folder = os.path.dirname(SETTINGS)
+        os.makedirs(folder, exist_ok=True)
+        with open(os.path.join(folder, "error.log"), "w", encoding="utf-8") as fh:
+            fh.write(text)
     except Exception:
         pass
-    App(root)
-    root.mainloop()
+    try:
+        ctypes.windll.user32.MessageBoxW(0, text[-1500:], "AutoClicker - error", 0x10)
+    except Exception:
+        pass
+
+
+if __name__ == "__main__":
+    try:
+        root = tk.Tk()
+        try:
+            root.iconbitmap(resource_path("icon.ico"))
+        except Exception:
+            pass
+        App(root)
+        root.mainloop()
+    except Exception:
+        report_crash()
