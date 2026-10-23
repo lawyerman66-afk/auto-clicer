@@ -14,7 +14,7 @@
         android:text="شروع فوری با زدن ▶ (بدون ساعت)" />
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" android:text="زمان شروع (ساعت / دقیقه / ثانیه)" />
+        android:layout_marginTop="8dp" android:text="زمان شروع (ساعت / دقیقه / ثانیه / میلی‌ثانیه)" />
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
         android:orientation="horizontal" android:layoutDirection="ltr">
         <EditText android:id="@+id/etHour" android:layout_width="0dp" android:layout_weight="1"
@@ -23,6 +23,8 @@
             android:layout_height="wrap_content" android:hint="دقیقه" android:inputType="number" />
         <EditText android:id="@+id/etSec" android:layout_width="0dp" android:layout_weight="1"
             android:layout_height="wrap_content" android:hint="ثانیه" android:inputType="number" />
+        <EditText android:id="@+id/etMs" android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:hint="میلی‌ثانیه" android:inputType="number" />
     </LinearLayout>
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -58,6 +60,31 @@
     <SeekBar android:id="@+id/sbSize" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:max="90" android:progress="34"
         android:layoutDirection="ltr" />
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_marginTop="20dp" android:textStyle="bold" android:text="کالیبراسیون و پینگ" />
+    <EditText android:id="@+id/etHost" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="آدرس سایت هدف (مثلاً example.com)"
+        android:inputType="textUri" android:layoutDirection="ltr" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button android:id="@+id/btnPing" android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:text="اندازه‌گیری پینگ" />
+        <Button android:id="@+id/btnSync" android:layout_width="0dp" android:layout_weight="1"
+            android:layout_height="wrap_content" android:text="همگام‌سازی ساعت" />
+    </LinearLayout>
+    <TextView android:id="@+id/padCalib" android:layout_width="match_parent"
+        android:layout_height="80dp" android:layout_marginTop="8dp" android:gravity="center"
+        android:background="#DDDDDD" android:text="ناحیه تست کالیبراسیون" />
+    <Button android:id="@+id/btnCalib" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:text="کالیبراسیون تأخیر کلیک" />
+    <CheckBox android:id="@+id/cbPingComp" android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:text="جبران پینگ: شروع زودتر به اندازه نصف پینگ" />
+    <EditText android:id="@+id/etEarly" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:hint="زودتر کلیک کن (میلی‌ثانیه، دستی)"
+        android:inputType="numberDecimal" />
+    <TextView android:id="@+id/tvCalib" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="" />
 
     <Button android:id="@+id/btnSave" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:layout_marginTop="16dp"

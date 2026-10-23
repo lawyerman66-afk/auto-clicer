@@ -38,7 +38,7 @@ class ClickService : AccessibilityService() {
     private class Cfg(
         val now: Boolean, val h: Int, val m: Int, val s: Int,
         val intervalMs: Long, val stopMode: Int, val stopValue: Long,
-        val anti: Boolean, val sizeDp: Int
+        val anti: Boolean, val sizeDp: Int, val earlyMs: Long, val offsetMs: Long, val startMs: Int
     )
 
     private class Target(val view: TargetView, val params: WindowManager.LayoutParams)
@@ -80,6 +80,8 @@ class ClickService : AccessibilityService() {
     private var sizeDp = 64
     private var nextAt = 0L
     private var startAtWall = 0L
+    private var targetTrue = 0L     // زمان هدف بر اساس ساعت واقعی
+    private var earlyMs = 0L
 
     private val durationStop = Runnable { finish() }
 
@@ -162,9 +164,15 @@ class ClickService : AccessibilityService() {
         val sv = p.getString("stopValue", "")?.toLongOrNull() ?: 0L
         if (sv <= 0) mode = 0
         val stopV = if (mode == 1) sv * 1000 else sv
+        val latency = p.getFloat("latencyMs", 0f)
+        val manual = p.getString("early", "")?.replace(',', '.')?.toDoubleOrNull() ?: 0.0
+        val pingHalf = if (p.getBoolean("pingComp", false)) p.getFloat("pingMs", 0f) / 2 else 0f
+        val early = (latency + manual + pingHalf).toLong().coerceAtLeast(0)
         return Cfg(
             now, h ?: 0, m ?: 0, s ?: 0, ms, mode, stopV,
-            p.getBoolean("anti", false), p.getInt("size", 34) + 30
+            p.getBoolean("anti", false), p.getInt("size", 34) + 30,
+            early, p.getLong("ntpOffset", 0L),
+            (p.getString("ms", "")?.toIntOrNull() ?: 0).coerceIn(0, 999)
         )
     }
 
@@ -282,14 +290,21 @@ class ClickService : AccessibilityService() {
         val cfg = loadConfig()
         if (cfg == null) { toast("ساعت شروع را در برنامه تنظیم کن (دکمه ⚙)"); return }
 
-        val startAt = if (cfg.now) System.currentTimeMillis() else {
+        // زمان واقعی = ساعت گوشی + اختلاف ساعت (همگام‌سازی با اینترنت)
+        val nowTrue = System.currentTimeMillis() + cfg.offsetMs
+        val tTrue = if (cfg.now) nowTrue else {
             val cal = Calendar.getInstance().apply {
+                timeInMillis = nowTrue
                 set(Calendar.HOUR_OF_DAY, cfg.h); set(Calendar.MINUTE, cfg.m)
-                set(Calendar.SECOND, cfg.s); set(Calendar.MILLISECOND, 0)
+                set(Calendar.SECOND, cfg.s); set(Calendar.MILLISECOND, cfg.startMs)
             }
-            if (cal.timeInMillis <= System.currentTimeMillis()) cal.add(Calendar.DAY_OF_YEAR, 1)
+            if (cal.timeInMillis <= nowTrue) cal.add(Calendar.DAY_OF_YEAR, 1)
             cal.timeInMillis
         }
+        targetTrue = if (cfg.now) 0L else tTrue
+        earlyMs = cfg.earlyMs
+        // کلیک به اندازه تأخیر کلیک (و پینگ) زودتر شروع می‌شود
+        val startAt = tTrue - cfg.offsetMs - cfg.earlyMs
 
         centers = targets.map { t ->
             val loc = IntArray(2)
@@ -310,6 +325,7 @@ class ClickService : AccessibilityService() {
         handler.postAtTime(tick, nextAt)
         if (stopMode == 1) handler.postAtTime(durationStop, nextAt + stopValue)
         toast(if (delay < 1500) "شروع شد" else "شروع در ${fmt(delay / 1000)} دیگر")
+        if (!cfg.now && delay > 4000) backgroundSync()
         playBtn?.text = "■"
     }
 
@@ -340,9 +356,48 @@ class ClickService : AccessibilityService() {
             px += Random.nextInt(-r, r + 1)
             py += Random.nextInt(-r, r + 1)
         }
+        tapRaw(px, py)
+    }
+
+    private fun tapRaw(px: Float, py: Float) {
         val path = Path().apply { moveTo(px, py) }
         val stroke = GestureDescription.StrokeDescription(path, 0, 10)
         dispatchGesture(GestureDescription.Builder().addStroke(stroke).build(), null, null)
+    }
+
+    /** برای کالیبراسیون: زمان (nanoTime) لحظه ارسال کلیک را برمی‌گرداند */
+    fun calibrationTap(x: Float, y: Float): Long {
+        val ns = System.nanoTime()
+        tapRaw(x, y)
+        return ns
+    }
+
+    /** وقتی هنوز تا شروع زمان هست، ساعت را با اینترنت همگام می‌کند و زمان شروع را اصلاح می‌کند */
+    private fun backgroundSync() {
+        Thread {
+            val r = NetTools.ntpOffset()
+            uiHandler.post {
+                if (r == null) {
+                    toast("همگام‌سازی ساعت ممکن نشد؛ از اختلاف ذخیره‌شده استفاده شد")
+                    return@post
+                }
+                getSharedPreferences("settings", Context.MODE_PRIVATE).edit()
+                    .putLong("ntpOffset", r.offsetMs)
+                    .putLong("ntpAt", System.currentTimeMillis()).apply()
+                if (running && clickCount == 0 && targetTrue != 0L) {
+                    val deviceTarget = targetTrue - r.offsetMs - earlyMs
+                    val delay = deviceTarget - System.currentTimeMillis()
+                    if (delay > 300) {
+                        handler.removeCallbacksAndMessages(null)
+                        startAtWall = deviceTarget
+                        nextAt = SystemClock.uptimeMillis() + delay
+                        handler.postAtTime(tick, nextAt)
+                        if (stopMode == 1) handler.postAtTime(durationStop, nextAt + stopValue)
+                        toast("ساعت با اینترنت همگام شد")
+                    }
+                }
+            }
+        }.start()
     }
 
     override fun onServiceConnected() { instance = this }
