@@ -1,98 +1,230 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:orientation="vertical" android:padding="20dp"
-    android:layoutDirection="rtl">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:fillViewport="true" android:background="@color/bg">
 
-    <Button android:id="@+id/btnAccess" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="۱) فعال‌سازی سرویس دسترسی‌پذیری (فقط بار اول)" />
+<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:orientation="vertical" android:layoutDirection="rtl">
 
-    <CheckBox android:id="@+id/cbNow" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_marginTop="12dp"
-        android:text="شروع فوری با زدن ▶ (بدون ساعت)" />
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginTop="8dp" android:text="زمان شروع (ساعت / دقیقه / ثانیه / میلی‌ثانیه)" />
+    <!-- سربرگ -->
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:layoutDirection="ltr">
-        <EditText android:id="@+id/etHour" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:hint="ساعت" android:inputType="number" />
-        <EditText android:id="@+id/etMin" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:hint="دقیقه" android:inputType="number" />
-        <EditText android:id="@+id/etSec" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:hint="ثانیه" android:inputType="number" />
-        <EditText android:id="@+id/etMs" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:hint="میلی‌ثانیه" android:inputType="number" />
+        android:orientation="horizontal" android:gravity="center_vertical"
+        android:background="@drawable/bg_header"
+        android:paddingStart="20dp" android:paddingEnd="20dp"
+        android:paddingTop="40dp" android:paddingBottom="26dp">
+        <ImageView android:layout_width="60dp" android:layout_height="60dp"
+            android:src="@mipmap/ic_launcher" android:contentDescription="logo" />
+        <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:orientation="vertical" android:layout_marginStart="14dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="اتو کلیکر" android:textColor="#FFFFFF" android:textSize="24sp"
+                android:textStyle="bold" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:text="کلیک دقیق، راس ساعت مشخص" android:textColor="#D6E6F5" android:textSize="13sp" />
+        </LinearLayout>
     </LinearLayout>
 
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" android:text="فاصله بین کلیک‌ها" />
     <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:layoutDirection="ltr">
-        <EditText android:id="@+id/etInterval" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:inputType="numberDecimal" android:text="300" />
-        <Spinner android:id="@+id/spUnit" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" />
+        android:orientation="vertical" android:padding="16dp">
+
+        <!-- ۱ -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card"
+            android:padding="16dp" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView style="@style/StepBadge" android:layout_width="30dp" android:layout_height="30dp" android:text="۱" />
+                <TextView style="@style/StepTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" android:text="فعال‌سازی سرویس" />
+                <TextView style="@style/Chip" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp" android:text="فقط بار اول" />
+            </LinearLayout>
+            <TextView style="@style/Label" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:text="بدون این سرویس، برنامه نمی‌تواند کلیک کند." />
+            <Button android:id="@+id/btnAccess" style="@style/BtnPrimary"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" android:text="باز کردن تنظیمات دسترسی‌پذیری" />
+        </LinearLayout>
+
+        <!-- ۲ -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card"
+            android:padding="16dp" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView style="@style/StepBadge" android:layout_width="30dp" android:layout_height="30dp" android:text="۲" />
+                <TextView style="@style/StepTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" android:text="کالیبراسیون تأخیر کلیک" />
+                <TextView style="@style/Chip" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp" android:text="فقط بار اول" />
+            </LinearLayout>
+            <TextView style="@style/Label" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:text="تأخیر واقعی کلیک در گوشی‌ات را می‌سنجد. به ناحیه زیر دست نزن." />
+            <TextView android:id="@+id/padCalib" android:layout_width="match_parent"
+                android:layout_height="76dp" android:layout_marginTop="10dp" android:gravity="center"
+                android:background="@drawable/bg_pad" android:textColor="#5F6B7A"
+                android:text="ناحیه تست کالیبراسیون" />
+            <Button android:id="@+id/btnCalib" style="@style/BtnSecondary"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" android:text="شروع کالیبراسیون" />
+        </LinearLayout>
+
+        <!-- ۳ -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card"
+            android:padding="16dp" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView style="@style/StepBadge" android:layout_width="30dp" android:layout_height="30dp" android:text="۳" />
+                <TextView style="@style/StepTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" android:text="اینترنت و ساعت" />
+                <TextView style="@style/Chip" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp" android:text="قبل از هر بار" />
+            </LinearLayout>
+            <EditText android:id="@+id/etHost" style="@style/Input"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" android:hint="آدرس سایت هدف (مثلاً example.com)"
+                android:inputType="textUri" android:layoutDirection="ltr" android:gravity="start" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layout_marginTop="8dp">
+                <Button android:id="@+id/btnPing" style="@style/BtnSecondary"
+                    android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp" android:text="اندازه‌گیری پینگ" />
+                <Button android:id="@+id/btnSync" style="@style/BtnSecondary"
+                    android:layout_width="0dp" android:layout_weight="1" android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp" android:text="همگام‌سازی ساعت" />
+            </LinearLayout>
+            <TextView android:id="@+id/tvCalib" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                android:background="@drawable/bg_status" android:padding="12dp"
+                android:textColor="@color/text" android:textSize="13sp" android:text="" />
+        </LinearLayout>
+
+        <!-- ۴ -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card"
+            android:padding="16dp" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView style="@style/StepBadge" android:layout_width="30dp" android:layout_height="30dp" android:text="۴" />
+                <TextView style="@style/StepTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" android:text="زمان شروع" />
+            </LinearLayout>
+            <CheckBox android:id="@+id/cbNow" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_marginTop="6dp"
+                android:text="شروع فوری با زدن ▶ (بدون ساعت)" />
+            <TextView style="@style/Label" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="6dp" android:text="ساعت : دقیقه : ثانیه : میلی‌ثانیه" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layoutDirection="ltr" android:layout_marginTop="4dp">
+                <EditText android:id="@+id/etHour" style="@style/Input" android:layout_width="0dp"
+                    android:layout_weight="1" android:layout_height="wrap_content" android:layout_margin="3dp"
+                    android:gravity="center" android:hint="ساعت" android:inputType="number" />
+                <EditText android:id="@+id/etMin" style="@style/Input" android:layout_width="0dp"
+                    android:layout_weight="1" android:layout_height="wrap_content" android:layout_margin="3dp"
+                    android:gravity="center" android:hint="دقیقه" android:inputType="number" />
+                <EditText android:id="@+id/etSec" style="@style/Input" android:layout_width="0dp"
+                    android:layout_weight="1" android:layout_height="wrap_content" android:layout_margin="3dp"
+                    android:gravity="center" android:hint="ثانیه" android:inputType="number" />
+                <EditText android:id="@+id/etMs" style="@style/Input" android:layout_width="0dp"
+                    android:layout_weight="1" android:layout_height="wrap_content" android:layout_margin="3dp"
+                    android:gravity="center" android:hint="میلی‌ثانیه" android:inputType="number" />
+            </LinearLayout>
+            <CheckBox android:id="@+id/cbPingComp" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_marginTop="8dp"
+                android:text="جبران پینگ (شروع زودتر به اندازه نصف پینگ)" />
+            <EditText android:id="@+id/etEarly" style="@style/Input"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="4dp" android:hint="زودتر کلیک کن (میلی‌ثانیه، دستی)"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <!-- ۵ -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card"
+            android:padding="16dp" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView style="@style/StepBadge" android:layout_width="30dp" android:layout_height="30dp" android:text="۵" />
+                <TextView style="@style/StepTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" android:text="تنظیمات کلیک" />
+            </LinearLayout>
+            <TextView style="@style/Label" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:text="فاصله بین کلیک‌ها" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:layoutDirection="ltr" android:gravity="center_vertical">
+                <EditText android:id="@+id/etInterval" style="@style/Input" android:layout_width="0dp"
+                    android:layout_weight="1" android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" android:text="300" android:gravity="center" />
+                <Spinner android:id="@+id/spUnit" android:layout_width="0dp" android:layout_weight="1"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <TextView style="@style/Label" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:text="توقف بعد از" />
+            <RadioGroup android:id="@+id/rgStop" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:orientation="vertical">
+                <RadioButton android:id="@+id/rbForever" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:checked="true" android:text="بی‌پایان (تا وقتی خودم متوقف کنم)" />
+                <RadioButton android:id="@+id/rbDuration" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="مدت زمان مشخص (ثانیه)" />
+                <RadioButton android:id="@+id/rbCount" android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" android:text="تعداد دور (هر دور = کلیک روی همه هدف‌ها)" />
+            </RadioGroup>
+            <EditText android:id="@+id/etStopValue" style="@style/Input"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:inputType="number" android:visibility="gone" />
+
+            <CheckBox android:id="@+id/cbAnti" android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:layout_marginTop="10dp"
+                android:text="ضد تشخیص (جابه‌جایی و تغییر زمان تصادفی کوچک)" />
+
+            <TextView android:id="@+id/tvSize" style="@style/Label"
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:text="اندازه دایره: 64" />
+            <SeekBar android:id="@+id/sbSize" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:max="90" android:progress="34"
+                android:layoutDirection="ltr" />
+        </LinearLayout>
+
+        <!-- ۶ -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card"
+            android:padding="16dp" android:layout_marginBottom="12dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView style="@style/StepBadge" android:layout_width="30dp" android:layout_height="30dp" android:text="۶" />
+                <TextView style="@style/StepTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" android:text="ذخیره و نمایش پنل" />
+            </LinearLayout>
+            <Button android:id="@+id/btnSave" style="@style/BtnAccent"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" android:text="ذخیره و نمایش پنل کنترل" />
+            <Button android:id="@+id/btnClosePanel" style="@style/BtnSecondary"
+                android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="8dp" android:text="بستن پنل" />
+            <TextView android:id="@+id/tvStatus" android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:layout_marginTop="12dp"
+                android:background="@drawable/bg_status" android:padding="12dp"
+                android:textColor="@color/text" android:textSize="13sp" android:text="آماده" />
+        </LinearLayout>
+
+        <!-- ۷ راهنما -->
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:orientation="vertical" android:background="@drawable/bg_card"
+            android:padding="16dp" android:layout_marginBottom="24dp">
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical">
+                <TextView style="@style/StepBadge" android:layout_width="30dp" android:layout_height="30dp" android:text="۷" />
+                <TextView style="@style/StepTitle" android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp" android:text="روی صفحه سایت" />
+            </LinearLayout>
+            <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:layout_marginTop="10dp" android:lineSpacingExtra="6dp"
+                android:textColor="@color/text" android:textSize="14sp"
+                android:text="۱) سایت را باز کن و صفحه را در حالت نهایی نگه دار.\n۲) در پنل شناور روی + بزن و دایره را روی دکمه هدف ببر.\n۳) صفحه را بالا و پایین نکن و بزرگ و کوچک نکن.\n۴) روی ▶ بزن. شمارنده پنل شمارش معکوس را نشان می‌دهد.\n۵) برای توقف فوری روی ■ بزن." />
+        </LinearLayout>
+
     </LinearLayout>
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginTop="16dp" android:text="توقف بعد از" />
-    <RadioGroup android:id="@+id/rgStop" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:orientation="vertical">
-        <RadioButton android:id="@+id/rbForever" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:checked="true" android:text="بی‌پایان (تا وقتی خودم متوقف کنم)" />
-        <RadioButton android:id="@+id/rbDuration" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:text="مدت زمان مشخص (ثانیه)" />
-        <RadioButton android:id="@+id/rbCount" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:text="تعداد دور (هر دور = کلیک روی همه هدف‌ها)" />
-    </RadioGroup>
-    <EditText android:id="@+id/etStopValue" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:inputType="number" android:visibility="gone" />
-
-    <CheckBox android:id="@+id/cbAnti" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_marginTop="8dp"
-        android:text="ضد تشخیص (جابه‌جایی و تغییر زمان تصادفی کوچک)" />
-
-    <TextView android:id="@+id/tvSize" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_marginTop="12dp" android:text="اندازه دایره: 64" />
-    <SeekBar android:id="@+id/sbSize" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:max="90" android:progress="34"
-        android:layoutDirection="ltr" />
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" android:textStyle="bold" android:text="کالیبراسیون و پینگ" />
-    <EditText android:id="@+id/etHost" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:hint="آدرس سایت هدف (مثلاً example.com)"
-        android:inputType="textUri" android:layoutDirection="ltr" />
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <Button android:id="@+id/btnPing" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:text="اندازه‌گیری پینگ" />
-        <Button android:id="@+id/btnSync" android:layout_width="0dp" android:layout_weight="1"
-            android:layout_height="wrap_content" android:text="همگام‌سازی ساعت" />
-    </LinearLayout>
-    <TextView android:id="@+id/padCalib" android:layout_width="match_parent"
-        android:layout_height="80dp" android:layout_marginTop="8dp" android:gravity="center"
-        android:background="#DDDDDD" android:text="ناحیه تست کالیبراسیون" />
-    <Button android:id="@+id/btnCalib" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="کالیبراسیون تأخیر کلیک" />
-    <CheckBox android:id="@+id/cbPingComp" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="جبران پینگ: شروع زودتر به اندازه نصف پینگ" />
-    <EditText android:id="@+id/etEarly" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:hint="زودتر کلیک کن (میلی‌ثانیه، دستی)"
-        android:inputType="numberDecimal" />
-    <TextView android:id="@+id/tvCalib" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_marginTop="6dp" android:text="" />
-
-    <Button android:id="@+id/btnSave" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_marginTop="16dp"
-        android:text="۲) ذخیره و نمایش پنل کنترل" />
-    <Button android:id="@+id/btnClosePanel" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:text="بستن پنل" />
-
-    <TextView android:id="@+id/tvStatus" android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:layout_marginTop="16dp" android:text="آماده" />
 </LinearLayout>
 </ScrollView>

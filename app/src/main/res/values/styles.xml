@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimaryDark">@color/primary_dark</item>
+        <item name="android:colorAccent">@color/teal</item>
+        <item name="android:windowBackground">@color/bg</item>
+        <item name="android:statusBarColor">@color/primary</item>
+    </style>
+
+    <style name="BtnBase" parent="android:Widget.Material.Button">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+    <style name="BtnPrimary" parent="BtnBase">
+        <item name="android:background">@drawable/btn_primary</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="BtnAccent" parent="BtnBase">
+        <item name="android:background">@drawable/btn_accent</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+    <style name="BtnSecondary" parent="BtnBase">
+        <item name="android:background">@drawable/btn_secondary</item>
+        <item name="android:textColor">@color/primary</item>
+    </style>
+
+    <style name="Input" parent="android:Widget.Material.EditText">
+        <item name="android:background">@drawable/bg_input</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/text</item>
+        <item name="android:textColorHint">#8A96A3</item>
+    </style>
+
+    <style name="StepBadge" parent="android:Widget.Material.TextView">
+        <item name="android:background">@drawable/bg_step_number</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="StepTitle" parent="android:Widget.Material.TextView">
+        <item name="android:textColor">@color/primary</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+    <style name="Chip" parent="android:Widget.Material.TextView">
+        <item name="android:background">@drawable/bg_chip</item>
+        <item name="android:textColor">#B34700</item>
+        <item name="android:textSize">11sp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:paddingTop">2dp</item>
+        <item name="android:paddingBottom">2dp</item>
+    </style>
+    <style name="Label" parent="android:Widget.Material.TextView">
+        <item name="android:textColor">@color/muted</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+</resources>

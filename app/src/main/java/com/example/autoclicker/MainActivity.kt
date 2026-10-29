@@ -176,7 +176,7 @@ class MainActivity : Activity() {
         }
         findViewById<Button>(R.id.btnCalib).setOnClickListener {
             val svc = ClickService.instance
-            if (svc == null) { toast("اول سرویس دسترسی‌پذیری را فعال کن"); return@setOnClickListener }
+            if (svc == null) { toast("اول سرویس دسترسی‌پذیری را فعال کن (مرحله ۱)"); return@setOnClickListener }
             val vis = Rect()
             if (!pad.getGlobalVisibleRect(vis) || vis.height() < pad.height || vis.width() < pad.width) {
                 toast("ناحیه تست باید کامل روی صفحه دیده شود")
@@ -216,7 +216,7 @@ class MainActivity : Activity() {
 
         findViewById<Button>(R.id.btnSave).setOnClickListener {
             val svc = ClickService.instance
-            if (svc == null) { toast("اول سرویس دسترسی‌پذیری را فعال کن"); return@setOnClickListener }
+            if (svc == null) { toast("اول سرویس دسترسی‌پذیری را فعال کن (مرحله ۱)"); return@setOnClickListener }
             val now = cbNow.isChecked
             val h = etHour.int(); val m = etMin.int(); val s = etSec.int()
             val intervalNum = etInterval.text.toString().trim().toDoubleOrNull()
@@ -250,7 +250,7 @@ class MainActivity : Activity() {
 
             svc.setTargetSize(sbSize.progress + 30)
             svc.showPanel()
-            tvStatus.text = "ذخیره شد. به صفحه مورد نظر برو، با + هدف بگذار و ▶ را بزن."
+            tvStatus.text = "ذخیره شد. به سایت برو، در پنل با + هدف بگذار (مرحله ۷) و ▶ را بزن."
             moveTaskToBack(true)
         }
 
